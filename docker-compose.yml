@@ -1,0 +1,29 @@
+@@ -4,6 +4,8 @@ services:
+  image: "postgres:latest"
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  nginx:
+    depends_on:
+@@ -16,9 +18,6 @@ services:
+
+  api:
+    image: tiwari123/3-tier-backend:v1.${IMAGE_TAG}
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - PGUSER=${PGUSER}
+      - PGHOST=${PGHOST}
+@@ -31,6 +30,6 @@ services:
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    image: tiwari123/3-tier-frontend:v1.${IMAGE_TAG}
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+
+volumes:
+  postgres_data:
